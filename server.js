@@ -11,8 +11,9 @@ connectDB();
 const port = process.env.PORT || 5808;
 
 app.use(cors({
-    origin: "https://coral-skin.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: /https:\/\/.*\.vercel\.app$/,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 app.use(express.json());
 
