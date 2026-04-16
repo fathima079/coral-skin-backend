@@ -16,6 +16,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
