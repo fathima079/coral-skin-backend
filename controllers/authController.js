@@ -111,7 +111,7 @@ const forgotPassword = async (req, res) => {
   user.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
   await user.save();
 
-  const resetLink = `http://localhost:5173/reset-password/${resetToken}`
+  const resetLink = `https://coral-skin.vercel.app/reset-password/${resetToken}`
 
   await sendEmail ({
     to: user.email,
@@ -182,6 +182,12 @@ const refreshTokenController = async ( req, res) => {
   const newAccessToken = generateToken(user._id);
 
   user.accessToken = newAccessToken;
+  await user.save();
+
+    res.json({
+      accessToken: newAccessToken,
+    });
+
 } catch (error) {
   return res.status(403).json({message: "Token invalid or expired"});
 }
